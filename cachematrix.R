@@ -1,9 +1,16 @@
 ## Put comments here that give an overall description of what your
 ## functions do
-
 ## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
+  if (nrow(x)!=ncol(x)) {
+    message("Please input a square matrix.")
+    return
+  }
+  if (det(x) == 0) {
+    message("Please input an invertible matrix.")
+    return
+  }
   m <- NULL
   set <- function(y) {
     x <<- y
@@ -13,11 +20,9 @@ makeCacheMatrix <- function(x = matrix()) {
   setinverse <- function(mean) m <<- mean
   getinverse <- function() m
   list(set = set, get = get,
-       setmean = setmean,
-       getmean = getmean)
+       setinverse = setinverse,
+       getinverse = getinverse)
 }
-
-
 ## Write a short comment describing this function
 
 cacheSolve <- function(x, ...) {
